@@ -8,9 +8,7 @@ let contentInput = document.querySelector("#content");
 let dateInput = document.querySelector("#date");
 let tempInput = document.querySelector("#temp");
 
-//store our api data so we only make one call to it, later use sessionData API to store on browser.
 let apiData;
-//dont put functions in here you aren't good enough yet
 let projectData = { temp: undefined, date: "", userResponse: "" };
 
 //make a controller function to send the data
@@ -28,13 +26,10 @@ const weatherData = async () => {
     const res = await fetch(`${baseURL}zip=${zipcode},us&appid=${apiKey}`);
     const data = await res.json();
     apiData = data.list;
-    //less typing
     let specificDate = apiData[apiData.length - 1];
-    //no need for a function for every piece of data ;)
     projectData.temp = specificDate.main.temp;
     projectData.date = specificDate.dt;
     projectData.userResponse = feelingInput.value;
-    //return the stuff you have changed, not the stuff you recieve
     return apiData;
   } catch (err) {
     return `Failed ${err}`;
